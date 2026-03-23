@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+.idea/
+.vscode/
+*.pyc
+*.pyo
+*.pyd
+.batch_cache/
+SAFE-main.zip
+.cache/
+clip/
+*.pt
+*.ckpt
+*.bin
+*.onnx
+*.safetensors

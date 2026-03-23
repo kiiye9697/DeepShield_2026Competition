@@ -1,0 +1,160 @@
+# SAFE:  Simple Preserved and Augmented FEatures
+
+This is the official Pytorch implementation of our paper:
+
+> [Improving Synthetic Image Detection Towards Generalization: An Image Transformation Perspectives](https://arxiv.org/abs/2408.06741)
+>
+> Ouxiang Li, Jiayin Cai, Yanbin Hao, Xiaolong Jiang, Yao Hu, Fuli Feng
+
+<p align="center">
+  <a href='https://arxiv.org/abs/2408.06741'>
+    <img src='https://img.shields.io/badge/Arxiv-2408.06741-A42C25?style=flat&logo=arXiv&logoColor=A42C25'>
+  </a>
+  <a href='https://huggingface.co/datasets/lioooox/DiTFake'>
+    <img src='https://img.shields.io/badge/HF-DiTFake-orange?style=flat&logo=HuggingFace&logoColor=orange'>
+  </a>
+  <a href='https://huggingface.co/datasets/lioooox/T2I-CoReBench-Images'>
+    <img src='https://img.shields.io/badge/HF-T2I--CoReBench--Images-orange?style=flat&logo=HuggingFace&logoColor=orange'>
+  </a>
+</p>
+
+
+## 📣 News
+
+- `2025/12` :fire: We organize a comprehensive T2I generation benchmark, [T2I-CoReBench](https://t2i-corebench.github.io/), and release **40 leading models’ generations** ($40 \times 4,320 = 172,800$ fake images in total) as [T2I-CoReBench-Images](https://huggingface.co/datasets/lioooox/T2I-CoReBench-Images), continuously expanding to `diffusion`, `autoregressive`, `unified`, and `closed-source` models. We hope this dataset can also benefit research on SID towards the latest advances in image generation.
+  
+  | Category             | Models                                                       |
+  | -------------------- | ------------------------------------------------------------ |
+  | **Diffusion**     | SD-3-Medium, SD-3.5-Medium, SD-3.5-Large, FLUX.1-schnell, FLUX.1-dev, FLUX.1-Krea-dev, FLUX.2-klein-4B, FLUX.2-klein-9B, FLUX.2-dev, PixArt-$\alpha$, PixArt-$\Sigma$, HiDream-I1, Qwen-Image, Qwen-Image-2512, HunyuanImage-3.0, Z-Image-Turbo, Z-Image, LongCat-Image |
+  | **Autogressive**  | Infinity-8B and GoT-R1-7B                                    |
+  | **Unified**       | BAGEL, BAGEL w/ Think, show-o2-1.5B, show-o2-7B, Janus-Pro-1B, Janus-Pro-7B, BLIP3o-4B, BLIP3o-8B, OmniGen2-7B |
+  | **Closed-Source** | Seedream 3.0, Seedream 4.0, Seedream 4.5, Gemini 2.0 Flash, Nano Banana, Nano Banana Pro, Nano Banana 2, Imagen 4, Imagen 4 Ultra, GPT-Image (GPT-4o), GPT-Image-1.5 |
+- `2025/04` :new: Include evaluation on GPT-4o generations, achieving 98.92% (GenEval) and 96.32% (ReasoningEdit) accuracies — see [Getting the data](#-getting-the-data).
+
+- `2024/11` :fire: We collect a new testset [`DiTFake`](https://huggingface.co/datasets/lioooox/DiTFake), comprising three SOTA DiT-based generators (i.e., Flux, PixArt, and SD3). We hope this dataset could facilitate more comprehensive evaluations for SID.
+
+- `2024/11` :tada: Our paper is accepted to KDD2025 ADS Track.
+
+## 📄 Requirements
+
+Install the environment as follows:
+
+```python
+# create conda environment
+conda create -n SAFE -y python=3.9
+conda activate SAFE
+# install pytorch 
+pip install torch==2.2.1 torchvision==0.17.1
+# install other dependencies
+pip install -r requirements.txt
+```
+
+We are using torch 2.2.1 in our production environment, but other versions should be fine as well.
+
+## 📊 Getting the data
+
+|             |                            Paper                             |                             Url                              |
+| :---------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+|  Train Set  | [CNNDetection CVPR2020](https://github.com/PeterWang512/CNNDetection)            | [Link](https://cmu.app.box.com/s/4syr4womrggfin0tsfhxohaec5dh6n48) |
+|  Val   Set  | [CNNDetection CVPR2020](https://github.com/PeterWang512/CNNDetection)            | [Link](https://cmu.app.box.com/s/4syr4womrggfin0tsfhxohaec5dh6n48/folder/129187348352) |
+|  Test Set 1  | [CNNDetection CVPR2020](https://github.com/PeterWang512/CNNDetection)            | [Link](https://cmu.app.box.com/s/4syr4womrggfin0tsfhxohaec5dh6n48/folder/129187348352) |
+|  Test Set 2  | [FreqNet AAAI2024](https://github.com/chuangchuangtan/FreqNet-DeepfakeDetection) | [Link](https://drive.google.com/drive/folders/11E0Knf9J1qlv2UuTnJSOFUjIIi90czSj?usp=sharing) |
+|  Test Set 3  | [UniversalFakeDetect CVPR2023](https://github.com/Yuheng-Li/UniversalFakeDetect) | [Link](https://drive.google.com/drive/folders/1nkCXClC7kFM01_fqmLrVNtnOYEFPtWO-?usp=sharing) |
+|  Test Set 4  | [GenImage NeurIPS2023](https://github.com/GenImage-Dataset/GenImage)             | [Link](https://drive.google.com/drive/folders/1jGt10bwTbhEZuGXLyvrCuxOI0cBqQ1FS) |
+|  Test Set 5  | [DiTFake Ours](https://github.com/Ouxiang-Li/SAFE)                               | [Link](https://huggingface.co/datasets/lioooox/DiTFake) |
+|  Test Set 6  | [GPT-ImgEval](https://github.com/PicoTrex/GPT-ImgEval)                           | [Link](https://huggingface.co/datasets/Yejy53/GPT-ImgEval) |
+|  Test Set 7  | [T2I-CoReBench](https://t2i-corebench.github.io/)                           | [Link](https://huggingface.co/datasets/lioooox/T2I-CoReBench-Images) |
+
+The generation script for our dataset is provided in `data/generation.py`, we hope more synthetic images from up-to-date generative models coud be promptly evaluated and made publicly available. Details of our `DiTFake` testset and comparative results can be found in the latest [ArXiv](https://arxiv.org/abs/2408.06741) paper.
+
+`2025/04` : Due to the impressive performance of **GPT-4o** in image generation tasks, it also poses new challenges for synthetic image detection. Here, we evaluate the generalization performance of our **SAFE** on this front, using two subsets collected by [GPT-ImgEval](https://github.com/PicoTrex/GPT-ImgEval): **GenEval** (555 fake images) and **ReasoningEdit** (190 fake images). Our method achieved **98.92%** and **96.32%** ACC on these two test sets, respectively.
+
+## 📂 Directory structure
+
+<details>
+<summary> You should organize the above data as follows: </summary>
+
+```
+data/datasets
+|-- train_ForenSynths
+|   |-- train
+|   |   |-- car
+|   |   |-- cat
+|   |   |-- chair
+|   |   |-- horse
+|   |-- val
+|   |   |-- car
+|   |   |-- cat
+|   |   |-- chair
+|   |   |-- horse
+|-- test1_ForenSynths/test
+|   |-- biggan
+|   |-- cyclegan
+|   |-- deepfake
+|   |-- gaugan
+|   |-- progan
+|   |-- stargan
+|   |-- stylegan
+|   |-- stylegan2
+|-- test2_Self-Synthesis/test
+|   |-- AttGAN
+|   |-- BEGAN
+|   |-- CramerGAN
+|   |-- InfoMaxGAN
+|   |-- MMDGAN
+|   |-- RelGAN
+|   |-- S3GAN
+|   |-- SNGAN
+|   |-- STGAN
+|-- test3_Ojha/test
+|   |-- dalle
+|   |-- glide_100_10
+|   |-- glide_100_27
+|   |-- glide_50_27
+|   |-- guided          # Also known as ADM.
+|   |-- ldm_100
+|   |-- ldm_200
+|   |-- ldm_200_cfg
+|-- test4_GenImage/test
+|   |-- ADM
+|   |-- BigGAN
+|   |-- Glide
+|   |-- Midjourney
+|   |-- stable_diffusion_v_1_4
+|   |-- stable_diffusion_v_1_5
+|   |-- VQDM
+|   |-- wukong
+|-- test5_DiTFake/test
+|   |-- FLUX.1-schnell
+|   |-- PixArt-Sigma-XL-2-1024-MS
+|   |-- stable-diffusion-3-medium-diffusers
+```
+</details>
+
+## 🔥 Training
+
+```
+bash scripts/train.sh
+```
+
+This script enables training with 4 GPUs, you can specify the number of GPUs by setting `GPU_NUM`.
+
+## 🧊 Inference
+
+```
+bash scripts/eval.sh
+```
+
+We provide the pretrained checkpoint in `./checkpoint/checkpoint-best.pth`, you can directly run the script to reproduce our results. 
+
+## ✍️ Citing
+If you find this repository useful for your work, please consider citing it as follows:
+```
+@inproceedings{li2025improving,
+  title={Improving synthetic image detection towards generalization: An image transformation perspective},
+  author={Li, Ouxiang and Cai, Jiayin and Hao, Yanbin and Jiang, Xiaolong and Hu, Yao and Feng, Fuli},
+  booktitle={Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V. 1},
+  pages={2405--2414},
+  year={2025}
+}
+```

@@ -1,0 +1,10 @@
+gradio>=5.0.0,<6.0.0
+kornia
+numpy
+Pillow
+pytorch_wavelets
+pywavelets
+scipy
+soundfile
+torch
+torchvision
